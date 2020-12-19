@@ -8,12 +8,9 @@ from watchdog.events import FileSystemEventHandler
 
 
 class FileHandler(FileSystemEventHandler):
-    def on_modified(self, event):  # on file modified
+    def on_any_event(self, event):  # on file modified
         for name in listdir(main_folder):
             src_file = join(main_folder, name)
-
-            if not isfile(src_file):
-                continue
 
             ext = splitext(name)[-1][
                   1::]  # [-1] is the last element of list, [1::] removes first character of extension (a dot symbol)

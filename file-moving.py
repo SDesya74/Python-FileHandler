@@ -9,11 +9,8 @@ folder_to = "To"
 
 
 class FileHandler(FileSystemEventHandler):
-    def on_modified(self, event):
+    def on_any_event(self, event):
         for file in os.listdir(folder_from):
-            if not isfile(file):
-                continue
-                
             source_path = join(folder_from, file)
             target_path = join(folder_to, file)
             os.rename(source_path, target_path)
