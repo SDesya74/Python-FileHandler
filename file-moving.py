@@ -1,7 +1,7 @@
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import os
-from os.path import join
+from os.path import join, isfile
 import time
 
 folder_from = "From"
@@ -11,6 +11,9 @@ folder_to = "To"
 class FileHandler(FileSystemEventHandler):
     def on_modified(self, event):
         for file in os.listdir(folder_from):
+            if not isfile(file):
+                continue
+                
             source_path = join(folder_from, file)
             target_path = join(folder_to, file)
             os.rename(source_path, target_path)
